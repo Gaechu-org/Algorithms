@@ -1,4 +1,4 @@
-const readline = require('readline');
+const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -7,10 +7,10 @@ const input = [];
 const flower = [];
 let answer = 0;
 
-rl.on('line', (line) => {
+rl.on("line", (line) => {
   input.push(line);
-}).on('close', () => {
-  parse(input);
+}).on("close", () => {
+  parse();
   process.exit();
 });
 
@@ -18,9 +18,9 @@ function parse() {
   const amount = Number(input.shift());
 
   input.forEach((str) => {
-    flower.push(str.split(' ').map(Number));
+    flower.push(str.split(" ").map(Number));
   });
-  
+
   solve(amount);
 }
 
@@ -42,13 +42,19 @@ function solve(amount) {
 
       // 이미 방문한 노드면 제낀다
       if (visit[i]) {
-        continue ;
+        continue;
       }
 
       // 현재까지 조사한 개화시점보다 빠른지 여부 조사
-      if (startMonth < startDate.month || startMonth === startDate.month && startDay <= startDate.day) {
+      if (
+        startMonth < startDate.month ||
+        (startMonth === startDate.month && startDay <= startDate.day)
+      ) {
         // 현재까지 조사한 낙화시점보다 늦는지 여부 조사
-        if (endMonth > endDate.month || endMonth === endDate.month && endDay > endDate.day) {
+        if (
+          endMonth > endDate.month ||
+          (endMonth === endDate.month && endDay > endDate.day)
+        ) {
           // 현재 값보다 개화가 더 빠르고 낙화가 더 늦다면 해당 index를 기억한다
           index = i;
           endDate.month = endMonth;
